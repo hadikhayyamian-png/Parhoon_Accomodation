@@ -1,31 +1,31 @@
-name: Build Web App
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: latest
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
-    - name: Install dependencies
-      run: bun install
+      - name: Install Dependencies
+        run: bun install
 
-    - name: Build production files
-      run: bun run build
+      - name: Build Project
+        run: bun run build
 
-    - name: Upload production folder as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: deploy-ready-dist
-        path: dist/
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # Vite compiles everything into the dist folder
+          branch: gh-pages # This automatically pushes the build to a safe branch
