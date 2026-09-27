@@ -1,0 +1,31 @@
+name: Build Web App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      run: bun install
+
+    - name: Build production files
+      run: bun run build
+
+    - name: Upload production folder as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: deploy-ready-dist
+        path: dist/
