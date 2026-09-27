@@ -1,0 +1,6 @@
+{
+  "name": "سامانه نظرسنجی زائرخانه‌های پرهون طرح",
+  "description": "سامانه مدیریت نظرسنجی و اسکن QR کد زائرخانه‌های پرهون طرح با داشبورد تحلیلی برخط و پرسشنامه سفارشی",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
